@@ -10,7 +10,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class NewsListAdapter(private int items = ArrayList<String>,private val listener: NewsItemClicked) extends RecyclerView.Adapter<NewsViewHolder> {
+public class NewsListAdapter(int items, ArrayList<String> listener, NewsItemClicked) extends RecyclerView.Adapter<NewsViewHolder>
+{
     @NonNull
     @Override
     public NewsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -19,12 +20,12 @@ public class NewsListAdapter(private int items = ArrayList<String>,private val l
         view.setOnClickListener() {
             listener.onItemClicked(items[viewHolder.adapterPosition]);
         }
-        return NewsViewHolder;
+        return new NewsViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull NewsViewHolder holder, int position) {
-        int currentItem = items[position];
+        View currentItem = items.[position];
         TextView textView = itemView.findViewById(R.id.item_textview);
         holder.textView.text = currentItem;
     }
@@ -32,18 +33,83 @@ public class NewsListAdapter(private int items = ArrayList<String>,private val l
     @Override
     public int getItemCount() {
 //        return 0;
-       return items.size;
+       return items.size();
     }
 }
-class NewsViewHolder extends RecyclerView.ViewHolder {
+ class NewsViewHolder extends RecyclerView.ViewHolder {
 
     public NewsViewHolder(@NonNull View itemView) {
         super(itemView);
-
-        TextView textView = itemView.findViewById(R.id.item_textview);
-
+        // Define click listener for the ViewHolder's View
+        TextView textView;
+        textView = (TextView) itemView.findViewById(R.id.item_textview);
     }
+//    public TextView getTextView() {
+//            return textView;
+//    }
 }
 interface NewsItemClicked {
     fun onItemClicked(item :String);
 }
+
+//------------------------------------------------------------------------------------------//
+
+//
+//public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder> {
+//
+//    private String[] localDataSet;
+//
+//    /**
+//     * Provide a reference to the type of views that you are using
+//     * (custom ViewHolder).
+//     */
+//    public static class ViewHolder extends RecyclerView.ViewHolder {
+//        private final TextView textView;
+//
+//        public ViewHolder(View view) {
+//            super(view);
+//            // Define click listener for the ViewHolder's View
+//
+//            textView = (TextView) view.findViewById(R.id.textView);
+//        }
+//
+//        public TextView getTextView() {
+//            return textView;
+//        }
+//    }
+//
+//    /**
+//     * Initialize the dataset of the Adapter.
+//     *
+//     * @param dataSet String[] containing the data to populate views to be used
+//     * by RecyclerView.
+//     */
+//    public CustomAdapter(String[] dataSet) {
+//        localDataSet = dataSet;
+//    }
+//
+//    // Create new views (invoked by the layout manager)
+//    @Override
+//    public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
+//        // Create a new view, which defines the UI of the list item
+//        View view = LayoutInflater.from(viewGroup.getContext())
+//                .inflate(R.layout.text_row_item, viewGroup, false);
+//
+//        return new ViewHolder(view);
+//    }
+//
+//    // Replace the contents of a view (invoked by the layout manager)
+//    @Override
+//    public void onBindViewHolder(ViewHolder viewHolder, final int position) {
+//
+//        // Get element from your dataset at this position and replace the
+//        // contents of the view with that element
+//        viewHolder.getTextView().setText(localDataSet[position]);
+//    }
+//
+//    // Return the size of your dataset (invoked by the layout manager)
+//    @Override
+//    public int getItemCount() {
+//        return localDataSet.length;
+//    }
+//}

@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
         // val items = fetchData()
         // val adapter: NewsListAdapter = NewsListAdapter(items);
         // recyclerView.adapter = adapter;
+
         // write above line in java
 
     }
