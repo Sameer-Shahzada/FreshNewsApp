@@ -15,6 +15,7 @@ public class NewsListAdapter(int items, ArrayList<String> listener, NewsItemClic
     @NonNull
     @Override
     public NewsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        // code
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_news,parent, false);
         viewHolder = NewsViewHolder(view);
         view.setOnClickListener() {
@@ -25,7 +26,8 @@ public class NewsListAdapter(int items, ArrayList<String> listener, NewsItemClic
 
     @Override
     public void onBindViewHolder(@NonNull NewsViewHolder holder, int position) {
-        View currentItem = items.[position];
+
+        View currentItem = items.get(position);
         TextView textView = itemView.findViewById(R.id.item_textview);
         holder.textView.text = currentItem;
     }
