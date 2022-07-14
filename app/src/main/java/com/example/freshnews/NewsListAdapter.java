@@ -1,5 +1,6 @@
 package com.example.freshnews;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,16 +13,18 @@ import java.util.ArrayList;
 
 public class NewsListAdapter extends RecyclerView.Adapter<NewsViewHolder> {
 
-    private final int items;
-    private final ArrayList<String> listener;
-    private Object NewsItemClicked = null;
+
+    private final ArrayList<String> items;
+//    private Object NewsItemClicked = null;
+//    Context context;
 
     // create a constructor to initialize the above items, ArrayList & NewsItemClicked
-    NewsListAdapter(int items, ArrayList<String> listener , Object NewsItemClicked)
+    NewsListAdapter(ArrayList<String> items)
         {
             this.items = items;
-            this.listener = listener;
-            this.NewsItemClicked = NewsItemClicked;
+//            this.NewsItemClicked = NewsItemClicked;
+            // this.items = items;
+//            this.context = context;
         }
 
     @NonNull
@@ -38,9 +41,8 @@ public class NewsListAdapter extends RecyclerView.Adapter<NewsViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull NewsViewHolder holder, int position) {
 
-        int currentItem = items.get(position);
-        TextView textView = itemView.findViewById(R.id.item_textview);
-        holder.textView.text = currentItem;
+        String currentItem = items.get(position);  // try to solve this error
+        holder.textView.setText(currentItem);
     }
 
     @Override
@@ -49,17 +51,16 @@ public class NewsListAdapter extends RecyclerView.Adapter<NewsViewHolder> {
 
 class NewsViewHolder extends RecyclerView.ViewHolder {
 
-    // take default constructor
+    //define data fields here to access findviewby id
+    TextView textView;
+
+    // default constructor
     public NewsViewHolder(@NonNull View itemView) {
         super(itemView);
 
-        // Define click listener for the ViewHolder's View
-        TextView textView;
-        textView = (TextView) itemView.findViewById(R.id.item_textview);
+        textView = itemView.findViewById(R.id.title);
     }
-//    public TextView getTextView() {
-//            return textView;
-//    }
+
 }
 
 //interface NewsItemClicked {
