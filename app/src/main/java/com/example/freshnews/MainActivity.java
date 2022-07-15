@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 //--------------------------------------------------------------------//
+    //-> Try to implement onItemClick event for items
 //    @Override
 //    public void onItemClicked(items, Strings){
 //
