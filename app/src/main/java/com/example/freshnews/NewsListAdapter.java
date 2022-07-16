@@ -15,15 +15,16 @@ public class NewsListAdapter extends RecyclerView.Adapter<NewsViewHolder> {
 
 
     private final ArrayList<String> items;
+    private final NewsItemClicked listener;
 //    private Object NewsItemClicked = null;
+    private Object viewHolder;
 //    Context context;
 
     // create a constructor to initialize the above items, ArrayList & NewsItemClicked
-    NewsListAdapter(ArrayList<String> items)
+    NewsListAdapter(ArrayList<String> items , NewsItemClicked listener)
         {
             this.items = items;
-//            this.NewsItemClicked = NewsItemClicked;
-            // this.items = items;
+            this.listener = listener;
 //            this.context = context;
         }
 
@@ -32,10 +33,20 @@ public class NewsListAdapter extends RecyclerView.Adapter<NewsViewHolder> {
     public NewsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         // To convert from xml to view format use Layout Inflater
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_news,parent, false);
-        return new NewsViewHolder(view);
-//        view.setOnClickListener() {
-//            listener.onItemClicked(items[viewHolder.adapterPosition]);
-//        }
+        // create an instance of NewsViewHolder
+        NewsViewHolder viewHolder = new NewsViewHolder(view);
+        // handle on click event for view
+        view.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                // code
+                listener.onItemClicked(items.get(viewHolder.getAbsoluteAdapterPosition()));
+            }
+        });
+
+        return viewHolder;
+//
     }
 
     @Override
@@ -63,6 +74,6 @@ class NewsViewHolder extends RecyclerView.ViewHolder {
 
 }
 
-//interface NewsItemClicked {
-//    fun onItemClicked(item :String);
-//}
+interface NewsItemClicked {
+    void onItemClicked(String item);
+}
