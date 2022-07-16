@@ -9,7 +9,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements NewsItemClicked {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
 
          ArrayList<String> items = fetchData();
 //         val adapter: NewsListAdapter = NewsListAdapter(items);
-         NewsListAdapter adapter = new NewsListAdapter(items);
+         NewsListAdapter adapter = new NewsListAdapter(items,this);
 //        RecipeAdapter adapter = new RecipeAdapter(list , this);
          rv.setAdapter(adapter);
 
@@ -36,6 +36,16 @@ public class MainActivity extends AppCompatActivity {
         }
         return list;
     }
+
+    @Override
+    public void onItemClicked(String item) {
+        Toast.makeText(this,"Clicked item " + item,Toast.LENGTH_LONG).show();
+    }
+
+//    @Override
+//    public void onPointerCaptureChanged(boolean hasCapture) {
+//
+//    }
 
 //--------------------------------------------------------------------//
     //-> Try to implement onItemClick event for items
