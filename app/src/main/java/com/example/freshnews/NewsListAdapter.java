@@ -4,17 +4,22 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+
 import java.util.ArrayList;
 
 public class NewsListAdapter extends RecyclerView.Adapter<NewsViewHolder> {
 
+    private Object ArrayList;
     // data fields
-    private final ArrayList<String> items;
+    private final ArrayList<News> items;
+
     private final NewsItemClicked listener;
 //    private Object viewHolder;
 
@@ -22,7 +27,7 @@ public class NewsListAdapter extends RecyclerView.Adapter<NewsViewHolder> {
 //    Context context;
 
     // create a constructor to initialize the above items & NewsItemClicked
-    NewsListAdapter(ArrayList<String> items , NewsItemClicked listener)
+    NewsListAdapter(ArrayList<News> items , NewsItemClicked listener)
         {
             this.items = items;
             this.listener = listener;
@@ -54,8 +59,18 @@ public class NewsListAdapter extends RecyclerView.Adapter<NewsViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull NewsViewHolder holder, int position) {
 
-        String currentItem = items.get(position);
-        holder.textView.setText(currentItem);
+        News currentItem = items.get(position);
+        holder.textView.setText(currentItem.title);
+        holder.textView.setText(currentItem.author);
+        Glide.with(holder.itemView.getContext().load(currentItem.imageUrl).into(holder.image));
+    }
+
+    public void updateNews(ArrayList<News> updateNews)
+    {
+        items.clear();
+        items.addAll(updateNews);
+
+        notifyDataSetChanged();
     }
 
     @Override
@@ -66,16 +81,19 @@ class NewsViewHolder extends RecyclerView.ViewHolder {
 
     //define data fields here to access findviewby id
     TextView textView;
+    ImageView imageView;
 
     // default constructor
     public NewsViewHolder(@NonNull View itemView) {
         super(itemView);
 
+        imageView = itemView.findViewById(R.id.image);
         textView = itemView.findViewById(R.id.title);
+        textView = itemView.findViewById(R.id.author);
     }
 
 }
 // create an interface for NewsItemClicked
 interface NewsItemClicked {
-    void onItemClicked(String item);
+    void onItemClicked(News News);
 }
