@@ -21,9 +21,7 @@ public class MainActivity extends AppCompatActivity implements NewsItemClicked {
         rv.setLayoutManager(new LinearLayoutManager(this));
 
          ArrayList<String> items = fetchData();
-//         val adapter: NewsListAdapter = NewsListAdapter(items);
          NewsListAdapter adapter = new NewsListAdapter(items,this);
-//        RecipeAdapter adapter = new RecipeAdapter(list , this);
          rv.setAdapter(adapter);
 
 
@@ -39,7 +37,7 @@ public class MainActivity extends AppCompatActivity implements NewsItemClicked {
 
     @Override
     public void onItemClicked(String item) {
-        Toast.makeText(this,"Clicked item " + item,Toast.LENGTH_LONG).show();
+        Toast.makeText(this,"Clicked " + item,Toast.LENGTH_LONG).show();
     }
 
 //    @Override
@@ -47,14 +45,4 @@ public class MainActivity extends AppCompatActivity implements NewsItemClicked {
 //
 //    }
 
-//--------------------------------------------------------------------//
-    //-> Try to implement onItemClick event for items
-//    @Override
-//    public void onItemClicked(items, Strings){
-//
-//    }
-//
-//                override fun void onItemClicked(item : String) {
-//        Toast.makeText(this, "clicked item is " + " " + item,Toast.LENGTH_LONG).show();
-//    }
 }

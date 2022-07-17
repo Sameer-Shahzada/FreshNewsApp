@@ -13,19 +13,20 @@ import java.util.ArrayList;
 
 public class NewsListAdapter extends RecyclerView.Adapter<NewsViewHolder> {
 
-
+    // data fields
     private final ArrayList<String> items;
     private final NewsItemClicked listener;
-//    private Object NewsItemClicked = null;
-    private Object viewHolder;
+//    private Object viewHolder;
+
+    //    private Object NewsItemClicked = null;
 //    Context context;
 
-    // create a constructor to initialize the above items, ArrayList & NewsItemClicked
+    // create a constructor to initialize the above items & NewsItemClicked
     NewsListAdapter(ArrayList<String> items , NewsItemClicked listener)
         {
             this.items = items;
             this.listener = listener;
-//            this.context = context;
+
         }
 
     @NonNull
@@ -36,8 +37,9 @@ public class NewsListAdapter extends RecyclerView.Adapter<NewsViewHolder> {
         // create an instance of NewsViewHolder
         NewsViewHolder viewHolder = new NewsViewHolder(view);
         // handle on click event for view
+        // click listener object
         view.setOnClickListener(new View.OnClickListener() {
-
+            // define method here
             @Override
             public void onClick(View view) {
                 // code
@@ -52,7 +54,7 @@ public class NewsListAdapter extends RecyclerView.Adapter<NewsViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull NewsViewHolder holder, int position) {
 
-        String currentItem = items.get(position);  // try to solve this error
+        String currentItem = items.get(position);
         holder.textView.setText(currentItem);
     }
 
@@ -73,7 +75,7 @@ class NewsViewHolder extends RecyclerView.ViewHolder {
     }
 
 }
-
+// create an interface for NewsItemClicked
 interface NewsItemClicked {
     void onItemClicked(String item);
 }
